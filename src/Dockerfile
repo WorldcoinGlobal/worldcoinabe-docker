@@ -39,9 +39,9 @@ RUN \
     sed -i 's/if args.host is None:/import socket/' Abe/abe.py && \
     sed -i 's/    args.host = "localhost"/args.host = socket.gethostbyname(socket.gethostname())/' Abe/abe.py && \
     service mysql start && \
-    mysql -u root -e 'create database abe;' && \
+    mysql -u root -e 'CREATE DATABASE abe CHARACTER SET utf8 COLLATE utf8_general_ci;' && \
     mysql -u root -e "CREATE USER 'abe'@'localhost' IDENTIFIED BY 'PASSWORD';" && \
-    mysql -u root -e 'grant all on abe.* to abe;' && \
+    mysql -u root -e 'GRANT ALL ON abe.* to abe;' && \
     python setup.py install
 
 EXPOSE 80
